@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+httpx
+python-dotenv
+mcp
+streamlit
+deepeval>=3.0.0

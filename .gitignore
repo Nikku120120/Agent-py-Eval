@@ -1,0 +1,7 @@
+.DS_Store
+venv/
+.env
+.deepeval/
+__pycache__/
+*.pyc
+.pytest_cache/

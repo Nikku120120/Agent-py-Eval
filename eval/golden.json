@@ -1,0 +1,62 @@
+{
+  "goldens": [
+    {
+      "input": "Show me all websites on the allowed whitelist.",
+      "expected_tools": [
+        {"name": "get_allowed_websites"}
+      ],
+      "expected_output": "A summary of allowed websites from the whitelist, or an indication that the list is empty."
+    },
+    {
+      "input": "What are the currently allowed websites?",
+      "expected_tools": [
+        {"name": "get_allowed_websites"}
+      ],
+      "expected_output": "Lists or describes the allowed websites configured in the system."
+    },
+    {
+      "input": "Add https://openai.com with name OpenAI to the allowed websites list.",
+      "expected_tools": [
+        {"name": "add_websites"}
+      ],
+      "expected_output": "Confirms that OpenAI / openai.com was added to the allowed websites."
+    },
+    {
+      "input": "Please add google.com (Google) and github.com (GitHub) to my allowed websites.",
+      "expected_tools": [
+        {"name": "add_websites"}
+      ],
+      "expected_output": "Confirms both sites were added to the whitelist."
+    },
+    {
+      "input": "Hello, how are you today?",
+      "expected_tools": [],
+      "expected_output": "A brief friendly reply without invoking website tools."
+    },
+    {
+      "name": "multi_turn_list_then_add",
+      "messages": [
+        {"role": "user", "content": "What's on my allowed websites list right now?"},
+        {"role": "user", "content": "Great — please add docs.spring.io with the name Spring Docs."}
+      ],
+      "expected_tools_by_turn": [
+        [{"name": "get_allowed_websites"}],
+        [{"name": "add_websites"}]
+      ],
+      "expected_output": "Confirms Spring Docs was added after checking the list."
+    },
+    {
+      "name": "multi_turn_full_transcript",
+      "messages": [
+        {"role": "user", "content": "Hi, I manage our website whitelist."},
+        {"role": "assistant", "content": "Hello! I can list allowed websites or add new ones. What would you like to do?"},
+        {"role": "user", "content": "List everything that's allowed, then add cursor.com as Cursor if it's missing."}
+      ],
+      "expected_tools": [
+        {"name": "get_allowed_websites"},
+        {"name": "add_websites"}
+      ],
+      "expected_output": "Shows current allowed sites and adds cursor.com if it was not already present."
+    }
+  ]
+}
